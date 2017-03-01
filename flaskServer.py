@@ -191,7 +191,7 @@ def index():
     :return: GoogleSignIn.html
     """
     print('Index function', file=sys.stderr)
-    return render_template('FirstPage.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
     import uuid
