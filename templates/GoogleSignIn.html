@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>MAHAT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!--<link href="../Cover%20Template%20for%20Bootstrap_files/cover.css" rel="stylesheet">-->
+    <link href="../static/css/cover.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <!--<meta name="google-signin-client_id" content="364984966396-v6tq7b6o6v3a2ghp965l88lcquq9t4ek.apps.googleusercontent.com">-->
+
+</head>
+<body>
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Mahat</h3>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h2 class="cover-heading">Sign in to your YouTube account</h2>
+                <button id="YouTubeButton" type="button" class="btn btn-default">Sign In</button>
+                <!--<button id="customBtn" type="button" class="btn btn-default customGPlusSignIn">Sign In</button>-->
+
+                <!--<div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+                <!--<div id="customBtn" class="customGPlusSignIn">-->
+                    <!--<span class="icon"></span>-->
+                    <!--<span class="buttonText">Google</span>-->
+                <!--</div>-->
+                <!--<button type="button" class="btn btn-default" onclick="signOut();">Sign Out</button>-->
+                <!--<a href="#" onclick="signOut();">Sign out</a>-->
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+    function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+    }
+    function signOut() {
+        //TODO: sign out doesn't really sign out
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+            console.log('User signed out.');
+        });
+    }
+</script>
+
+
+<script>
+    var googleUser = {};
+    var startApp = function() {
+        gapi.load('auth2', function(){
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+                client_id: '364984966396-v6tq7b6o6v3a2ghp965l88lcquq9t4ek.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+            attachSignin(document.getElementById('customBtn'));
+        });
+    };
+    function attachSignin(element) {
+        auth2.attachClickHandler(element, {},
+                function(googleUser) {
+                    var profile = googleUser.getBasicProfile();
+                    var name = profile.getName();
+//                    document.getElementById('name').innerText = "Signed in: " +
+//                            googleUser.getBasicProfile().getName();
+                    console.log("Signed in: ", googleUser.getBasicProfile().getName());
+                    location.href = "../static/searchCity.html";
+                }, function(error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                });
+    }
+</script>
+<script>startApp();</script>
+</body>
+</html>

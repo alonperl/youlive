@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+
+    <title>MAHAT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <!--<link href="../Cover%20Template%20for%20Bootstrap_files/cover.css" rel="stylesheet">-->
+    <link href="../static/css/cover.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
+    <script src="https://apis.google.com/js/api:client.js"></script>
+    <!--<meta name="google-signin-client_id" content="364984966396-v6tq7b6o6v3a2ghp965l88lcquq9t4ek.apps.googleusercontent.com">-->
+
+</head>
+<body>
+<div class="site-wrapper">
+
+    <div class="site-wrapper-inner">
+
+        <div class="cover-container">
+
+            <div class="masthead clearfix">
+                <div class="inner">
+                    <h3 class="masthead-brand">Mahat</h3>
+                </div>
+            </div>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Select Area, and Login to your YouTube Account</h1>
+
+                <!--<form id="locationForm">-->
+                <form id="searchYouTubeForm" action="/callYouTube" method="Post">
+                <!--<form id="searchYouTubeForm" action="/callYouTube" method="post">-->
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="TLV">תל אביב
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="CENTER">מרכז
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="JER">ירושלים
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="NORTH">צפון
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="HAIFA">חיפה והקריות
+                    </label>
+                    <label class="checkbox-inline">
+                        <input type="checkbox" class="locationCheckbox" name="check" value="SOUTH"> דרום
+                    </label>
+                <!--</form>-->
+                <br/>
+
+                <!--<form id="searchYouTubeForm" action="/callYouTube" method="post">-->
+                    <button id="YouTubeButton" type="submit" class="btn btn-default">Sign In</button>
+                    <!--<button type="button" class="btn btn-default" onclick="searchResults()">Sign In</button>-->
+                </form>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    function searchResults(){
+        var cb = document.getElementsByClassName("locationCheckbox");
+        var locationToCrawl = [];
+        for (var i = 0; i < cb.length; i++) {
+            if (cb[i].checked == true){
+                locationToCrawl.push(cb[i].value);
+            }
+        }
+        console.log(locationToCrawl);
+
+        document.getElementById("searchYouTubeForm").submit();
+
+//        $.ajax({
+//            url: "/callYouTube",
+//            type: "POST",
+////            data: JSON.stringify({locations: locationToCrawl}),
+////            dataType: 'json',
+////            contentType: "application/json; charset=utf-8",
+//            success: function(dat) { console.log(dat); }
+//        });
+
+<!--locationList: JSON.stringify(locationToCrawl)-->
+//        <!--$.getJSON('http://127.0.0.1:8888/' + 'sendLocations', {-->
+//
+//        <!--}, function(data){-->
+//            <!--console.log(data.result)-->
+//            <!--$( "#result" ).text(data.result);-->
+//        <!--});-->
+        
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>blabla</title>
+</head>
+<body>
+    <script>
+        var blabla = '{{ resultEvents|safe }}';
+        console.log(blabla);
+        var afterParse = JSON.parse(blabla);
+        console.log(typeof(afterParse));
+    </script>
+</body>
+</html>
